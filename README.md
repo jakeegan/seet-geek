@@ -6,8 +6,8 @@
 
 First, clone this repo:
 ```
-git clone https://github.com/CISC-CMPE-327/CI-Python
-cd CI-Python 
+git clone https://github.com/jakeegan/Seet-Geek
+cd Seet-Geek
 ```
 
 To run the application (make sure you have a python environment of 3.5+)
