@@ -28,7 +28,7 @@ Actions:
  - open /test_page
  - validate that current page contains message '404 error'
  
-#### R8.1.1 User not logged in and tries to make a request to a nonexistent page
+#### R8.1.2 User not logged in and tries to make a request to a nonexistent page
 Mocking:
  - Mock backend.get_page to return a test_page instance
  
