@@ -1,14 +1,18 @@
 import pytest
+import requests
 from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
 
 
-# integration testing: the test case interacts with the 
-# browser, and test the whole system (frontend+backend).
+@pytest.mark.usefixtures('server')
+def test_server_is_live():
+    r = requests.get(base_url)
+    assert r.status_code == 200
+
 
 @pytest.mark.usefixtures('server')
-class Registered(BaseCase):
+class SimpleLoginTest(BaseCase):
 
     def register(self):
         """register new user"""
@@ -27,7 +31,7 @@ class Registered(BaseCase):
         self.click('input[type="submit"]')
 
     def test_register_login(self):
-        """ This test checks the implemented login/logout feature """
+        """ This test checks standard login for the Swag Labs store. """
         self.register()
         self.login()
         self.open(base_url)

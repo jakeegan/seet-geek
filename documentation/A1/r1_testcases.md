@@ -1,6 +1,6 @@
 ## R1 Test Cases
 
-Test Data:
+Test User:
 ```
 test_user = User(
     email='test_frontend@test.com',
@@ -11,42 +11,42 @@ test_user = User(
 
 Invalid emails:
 ```
-invalid_test_user1 = User(
+invalid_email_test_user1 = User(
     email='Abc.example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user2 = User(
+invalid_email_test_user2 = User(
     email='A@b@c@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user3 = User(
+invalid_email_test_user3 = User(
     email='a"b(c)d,e:f;g<h>i[j\k]l@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user4 = User(
+invalid_email_test_user4 = User(
     email='just"not"right@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user5 = User(
+invalid_email_test_user5 = User(
     email='this is"not\allowed@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user6 = User(
+invalid_email_test_user6 = User(
     email='this\ still\"not\\allowed@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user7 = User(
+invalid_email_test_user7 = User(
     email='1234567890123456789012345678901234567890123456789012345678901234+x@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-invalid_test_user8 = User(
+invalid_email_test_user8 = User(
     email='i_like_underscore@but_its_not_allow_in_this_part.example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
@@ -55,72 +55,72 @@ invalid_test_user8 = User(
 
 Valid emails:
 ```
-valid_test_user1 = User(
+valid_emial_test_user1 = User(
     email='simple@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user2 = User(
+valid_email_test_user2 = User(
     email='very.common@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user3 = User(
+valid_email_test_user3 = User(
     email='disposable.style.email.with+symbol@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user4 = User(
+valid_email_test_user4 = User(
     email='other.email-with-hyphen@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user5 = User(
+valid_email_test_user5 = User(
     email='fully-qualified-domain@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user6 = User(
+valid_email_test_user6 = User(
     email='user.name+tag+sorting@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user7 = User(
+valid_email_test_user7 = User(
     email='x@example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user8 = User(
+valid_email_test_user8 = User(
     email='example-indeed@strange-example.com',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user9 = User(
+valid_email_test_user9 = User(
     email='admin@mailserver1',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user10 = User(
+valid_email_test_user10 = User(
     email='example@s.example',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user11 = User(
+valid_email_test_user11 = User(
     email='" "@example.org',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user12 = User(
+valid_email_test_user12 = User(
     email='"john..doe"@example.org',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user13 = User(
+valid_email_test_user13 = User(
     email='mailhost!username@example.org',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
 )
-valid_test_user14 = User(
+valid_email_test_user14 = User(
     email='user%example.com@example.org',
     name='test_frontend',
     password=generate_password_hash('test_frontend')
@@ -129,22 +129,22 @@ valid_test_user14 = User(
 
 Invalid password:
 ```
-invalid_test_user9 = User(
+invalid_password_test_user1 = User(
     email='simple@example.com',
     name='test_frontend',
     password='Test_'
 )
-invalid_test_user10 = User(
+invalid_password_test_user2 = User(
     email='simple@example.com',
     name='test_frontend',
     password='test_ing'
 )
-invalid_test_user11 = User(
+invalid_password_test_user3 = User(
     email='simple@example.com',
     name='test_frontend',
     password='TEST_ING'
 )
-invalid_test_user12 = User(
+invalid_password_test_user4 = User(
     email='simple@example.com',
     name='test_frontend',
     password='Testing'
@@ -153,18 +153,18 @@ invalid_test_user12 = User(
 
 Valid password:
 ```
-valid_test_user15 = User(
+valid_password_test_user1 = User(
     email='simple@example.com',
     name='test_frontend',
     password='Test_ing'
 )
 
-valid_test_user15 = User(
+valid_password_test_user2 = User(
     email='simple@example.com',
     name='test_frontend',
     password='Testing!'
 )
-valid_test_user15 = User(
+valid_password_test_user3 = User(
     email='simple@example.com',
     name='test_frontend',
     password='tEst_1'
@@ -173,21 +173,21 @@ valid_test_user15 = User(
 
 #### Test case R1.1 - If the user hasn't logged in, show the login page
 
-##### Test Case R1.1.1 - Redirect from /
+##### Test Case R1.1.1 - If the user navigates to /
 
 Actions:
  - open /logout
  - open /
  - validate that current page contains `#message` element
  
-##### Test Case R1.1.2 - Redirect from /sell
+##### Test Case R1.1.2 - If the user navigates to /sell
 
 Actions:
  - open /logout
  - open /sell
  - validate that current page contains `#message` element
  
-##### Test Case R1.1.3 - Redirect from /buy
+##### Test Case R1.1.3 - If the user navigates to /buy
 
 Actions:
  - open /logout
@@ -229,6 +229,7 @@ Actions:
 Actions:
  - open /logout
  - open /login
+ - validate form element contains `method="post"`
  - validate that current page contains `#btn-submit` element with `value="Log In"`
 
 #### Test case R1.6 - Email and password both cannot be empty
@@ -270,61 +271,57 @@ Actions:
 ##### Test case R1.7.1 - Invalid email entered
 
 Mocking:
- - Mock backend.get_user to return a invalid_test_user instance
+ - Mock backend.get_user to return a invalid_email_test_user instance
  
 Actions:
  - open /logout
  - open /login
  - enter test_user's email into element `#email`
  - enter test_user's password into element `#password`
- - click element `input[type="submit"]`
  - validate that `#message` element contains the text 'email/password format is incorrect.'
  
 ##### Test case R1.7.2 - Valid email entered
 
 Mocking:
- - Mock backend.get_user to return a valid_test_user instance
+ - Mock backend.get_user to return a valid_email_test_user instance
  
 Actions:
  - open /logout
  - open /login
  - enter test_user's email into element `#email`
  - enter test_user's password into element `#password`
- - click element `input[type="submit"]`
- - validate that current page contains `#welcome-header` element
+ - validate that `#message` element contains the text 'please login'
 
 #### Test case R1.8 - Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character
 
 ##### Test case R1.8.1 - Password doesn't meet requirements
 
 Mocking:
- - Mock backend.get_user to return a invalid_test_user instance
+ - Mock backend.get_user to return a invalid_password_test_user instance
  
 Actions:
  - open /logout
  - open /login
  - enter test_user's email into element `#email`
  - enter test_user's password into element `#password`
- - click element `input[type="submit"]`
  - validate that `#message` element contains the text 'email/password format is incorrect.'
 
 ##### Test case R1.8.2 - Password meets requirements
 
 Mocking:
- - Mock backend.get_user to return a valid_test_user instance
+ - Mock backend.get_user to return a valid_password_test_user instance
  
 Actions:
  - open /logout
  - open /login
  - enter test_user's email into element `#email`
  - enter test_user's password into element `#password`
- - click element `input[type="submit"]`
- - validate that current page contains `#welcome-header` element
+ - validate that `#message` element contains the text 'please login'
 
 #### Test case R1.9 - For any formatting errors, render the login page and show the message 'email/password format is incorrect.'
 
 Mocking:
- - Mock backend.get_user to return a invalid_test_user instance
+ - Mock backend.get_user to return a invalid_password_test_user instance or invalid_email_test_user instance
  
 Actions:
  - open /logout
@@ -359,4 +356,4 @@ Actions:
  - enter test_user's password into element `#password`
  - delete test_user instance
  - click element `input[type="submit"]`
- - validate that `#message` element contains the text 'email/password format is incorrect.'
+ - validate that `#message` element contains the text 'email/password combination incorrect.'
