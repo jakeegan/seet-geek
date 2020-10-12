@@ -193,6 +193,13 @@ Actions:
  - open /logout
  - open /buy
  - validate that current page contains `#message` element
+ 
+##### Test Case R1.1.4 - If the user navigates to /update
+
+Actions:
+ - open /logout
+ - open /update
+ - validate that current page contains `#message` element
 
 #### Test case R1.2 - The login page has a message that by default says 'please login'
 
