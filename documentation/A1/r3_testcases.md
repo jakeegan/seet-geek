@@ -57,7 +57,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - validate / opens
 
 ### Test case R3.2 - This page shows a header 'Hi {}'.format(user.name)
@@ -67,7 +67,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate current page `#welcome-header` element displays `Hi test_frontend`
 
@@ -81,7 +81,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate current page contains `#balance` element
 
@@ -92,7 +92,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - click element `input[type="logout"]`
 - validate /logout is open
@@ -110,7 +110,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate element `#Ticket` displays text `test_ticket_yo` 
 
@@ -121,7 +121,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate element `#Ticket` displays text `quantity` and that value is `10`
 
@@ -133,7 +133,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate element `#Ticket` displays owner's email
 - validate email matches `test_frontend@test.com`
@@ -145,7 +145,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate all element `#Ticket` displays text `price` and a value of `10`
 
@@ -156,7 +156,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate no element `#Ticket` displays date older than current date
 - validate element `#Ticket` displayes date `20201101`
@@ -168,7 +168,7 @@ Actions
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - validate element `#TicketOld` displays field `date` with a value of `20101101`
 - validate element `#TicketOld` displays field `name` with a value of `test_ticket_old`
@@ -181,7 +181,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - open element `#form-sell`
 - validate `#form-sell` element contains `#name` field
@@ -198,7 +198,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - open element `#form-buy`
 - validate `#form-buy` element contains `#name` field
@@ -212,7 +212,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - open element `#form-update`
 - validate `#form-update` element contains `#name` field
@@ -228,7 +228,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - input `ticket_se` in `#form_sell`
 - click element `input[type="submit"]`
@@ -243,7 +243,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - input `ticket_bu` in `#form-buy`
 - click element `input[type="submit"]`
@@ -258,7 +258,7 @@ Actions:
 - open /login
 - enter test_user's email into element `#email`
 - enter test_user's password into element `#password`
-- click element `input[type="submit"]
+- click element `input[type="submit"]`
 - open /
 - input `ticket_up` in `#form-update`
 - click element `input[type="submit"]`
