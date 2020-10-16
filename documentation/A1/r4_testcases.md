@@ -189,7 +189,7 @@ Actions:
 -validate `#error-message` displays message `Ticket Quantity must be more than 0`
 -open /logout
 
-#### Test Case R4.3.2 - 0 quantity
+#### Test Case R4.3.2 - More than 100 quantity
 
 Actions:
 
