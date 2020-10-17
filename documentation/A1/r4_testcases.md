@@ -109,7 +109,7 @@ Actions:
 -enter invalid_ticket_name1's quantity into element `#sell_quantity`
 -enter invalid_ticket_name1's price into element `#sell_price`
 -enter invalid_ticket_name1's date into element `#sell_date`
--click element `#buy_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Name must be alphanumeric`
 -open /logout
 
@@ -128,7 +128,7 @@ Actions:
 -enter invalid_ticket_name2's quantity into element `#sell_quantity`
 -enter invalid_ticket_name2's price into element `#sell_price`
 -enter invalid_ticket_name2's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Name must not include a space at the beginning`
 -open /logout
 
@@ -146,7 +146,7 @@ Actions:
 -enter invalid_ticket_name3's quantity into element `#sell_quantity`
 -enter invalid_ticket_name3's price into element `#sell_price`
 -enter invalid_ticket_name3's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Name must not include a space at the end`
 -open /logout
 
@@ -164,7 +164,7 @@ Actions:
 -enter invalid_ticket_name4's quantity into element `#sell_quantity`
 -enter invalid_ticket_name4's price into element `#sell_price`
 -enter invalid_ticket_name4's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Name must not be longer than 60 characters`
 -open /logout
 
@@ -185,7 +185,7 @@ Actions:
 -enter invalid_ticket_quantity1's quantity into element `#sell_quantity`
 -enter invalid_ticket_quantity1's price into element `#sell_price`
 -enter invalid_ticket_quantity1's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Quantity must be more than 0`
 -open /logout
 
@@ -203,7 +203,7 @@ Actions:
 -enter invalid_ticket_quantity2's quantity into element `#sell_quantity`
 -enter invalid_ticket_quantity2's price into element `#sell_price`
 -enter invalid_ticket_quantity2's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Quantity cannot be more than 100`
 -open /logout
 
@@ -224,7 +224,7 @@ Actions:
 -enter invalid_ticket_price1's quantity into element `#sell_quantity`
 -enter invalid_ticket_price1's price into element `#sell_price`
 -enter invalid_ticket_price1's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Price cannot be less than 10`
 -open /logout
 
@@ -242,7 +242,7 @@ Actions:
 -enter invalid_ticket_price2's quantity into element `#sell_quantity`
 -enter invalid_ticket_price2's price into element `#sell_price`
 -enter invalid_ticket_price2's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Price cannot be more than 100`
 -open /logout
 
@@ -263,7 +263,7 @@ Actions:
 -enter invalid_ticket_date1's quantity into element `#sell_quantity`
 -enter invalid_ticket_date1's price into element `#sell_price`
 -enter invalid_ticket_date1's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Date must not include non-numeric characters`
 -open /logout
 
@@ -281,7 +281,7 @@ Actions:
 -enter invalid_ticket_date2's quantity into element `#sell_quantity`
 -enter invalid_ticket_date2's price into element `#sell_price`
 -enter invalid_ticket_date2's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate `#error-message` displays message `Ticket Date must be 8 characters long`
 -open /logout
 
@@ -299,12 +299,12 @@ Actions:
 -enter invalid_ticket_name1's quantity into element `#sell_quantity`
 -enter invalid_ticket_name1's price into element `#sell_price`
 -enter invalid_ticket_name1's date into element `#sell_date`
--click element `#sell_submit`
+-click element `input[type="submit"]`
 -validate page is redirected to /
 -validate `#error-message` displays message `Ticket Date must be 8 characters long`
 -open /logout
 
-### Test case R4.7 - For any errors, redirect back to / and show an error message
+### Test case R4.7 - The added new ticket information will be posted on the user profile page
 
 Actions:
 
@@ -318,6 +318,6 @@ Actions:
 -enter test_ticket's quantity into element `#sell_quantity`
 -enter test_ticket's price into element `#sell_price`
 -enter test_ticket's date into element `#sell_date`
--click element `#sell_submit`
--open /login
+-click element `input[type="submit"]`
+-open /
 -validate current page contains `#Ticket_Information` element
