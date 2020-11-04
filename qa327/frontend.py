@@ -127,3 +127,21 @@ def profile(user):
     # front-end portals
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, tickets=tickets)
+
+# The sell page reference
+@app.route('/sell', methods=['POST'])
+def sell_post():
+    # templates are stored in the templates folder
+    return render_template('sell.html', message='')
+
+# The sell page reference
+@app.route('/buy', methods=['POST'])
+def buy_post():
+    # templates are stored in the templates folder
+    return render_template('buy.html', message='')
+
+# The sell page reference
+@app.route('/update', methods=['POST'])
+def update_post():
+    # templates are stored in the templates folder
+    return render_template('update.html', message='')

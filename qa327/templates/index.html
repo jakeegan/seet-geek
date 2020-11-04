@@ -7,14 +7,15 @@
 {% block content %}
 <h2 id="welcome-header">Hello {{ user.name }}</h2>
 
+<!-- User Balance Information -->
 <div id="balance">
     <div>
         <h4>Available balance: </h4>
     </div>
 </div>
 
+<!-- Ticket information -->
 <h2 >Here are all available tickets</h2>
-
 <div id="tickets">
 {% for ticket in tickets %}
     <div>
@@ -23,8 +24,9 @@
 {% endfor %}
 </div>
 
+<!-- Sell Form --> 
 <button onclick="openFormSell()">Sell Form</button>
-<form id="sellForm" style="display:none">
+<form action="/sell" id="sellForm" style="display:none" method="post">
     <label for="name">Ticket Name:</label>
     <input type="text" id="name" name="name" value="Type here">
     <br>
@@ -39,12 +41,12 @@
     <br>
     <input type="submit" value="Submit">
 </form>
-
 <br>
 <br>
 
+<!-- Buy Form --> 
 <button onclick="openFormBuy()">Buy Form</button>
-<form id="buyForm" style="display:none">
+<form action="/buy" id="buyForm" style="display:none" method="post">
     <label for="name">Ticket Name:</label>
     <input type="text" id="name" name="name" value="Type here">
     <br>
@@ -53,12 +55,12 @@
     <br>
     <input type="submit" value="Submit">
 </form>
-
 <br>
 <br>
 
+<!-- Update Form --> 
 <button onclick="openFormUpdate()">Update Form</button>
-<form id="updateForm" style="display:none">
+<form  action="/update" id="updateForm" style="display:none" method="post">
     <label for="name">Ticket Name:</label>
     <input type="text" id="name" name="name" value="Type here">
     <br>
@@ -75,7 +77,7 @@
 </form>
 
 
-
+<!-- JavaScript code to control buttons-->
 <script>
     function openFormSell(){
         var x = document.getElementById("sellForm");
@@ -103,6 +105,7 @@
     }
 </script>
 
+<br>
 <br>
 <a href='/logout'>logout</a>
 {% endblock %}
