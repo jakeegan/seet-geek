@@ -125,8 +125,10 @@ def profile(user):
     # by using @authenticate, we don't need to re-write
     # the login checking code all the time for other
     # front-end portals
+    #newTicket = bn.new_ticket()
     tickets = bn.get_all_tickets()
-    return render_template('index.html', user=user, tickets=tickets)
+    print (tickets)
+    return render_template('index.html', user=user, ticket=tickets)
 
 # The sell page reference
 @app.route('/sell', methods=['POST'])

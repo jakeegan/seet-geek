@@ -10,18 +10,19 @@
 <!-- User Balance Information -->
 <div id="balance">
     <div>
-        <h4>Available balance: </h4>
+        <h4>Available balance: $500</h4>
     </div>
 </div>
 
 <!-- Ticket information -->
 <h2 >Here are all available tickets</h2>
 <div id="tickets">
-{% for ticket in tickets %}
     <div>
-        <h4>{{ ticket.name }} {{ ticket.price }}</h4>
+        <h4>Name: {{ ticket.name }} <br> 
+            Price: {{ ticket.price }} <br>
+            Quantity: {{ticket.quantity}} <br>
+        </h4>
     </div>
-{% endfor %}
 </div>
 
 <!-- Sell Form --> 
