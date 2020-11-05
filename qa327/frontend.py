@@ -131,17 +131,27 @@ def profile(user):
 # The sell page reference
 @app.route('/sell', methods=['POST'])
 def sell_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    price = request.form.get('price')
+    expiration_date = request.form.get('expiration_date')
     # templates are stored in the templates folder
-    return render_template('sell.html', message='')
+    return render_template('sell.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)
 
 # The sell page reference
 @app.route('/buy', methods=['POST'])
 def buy_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
     # templates are stored in the templates folder
-    return render_template('buy.html', message='')
+    return render_template('buy.html', variable1=name, variable2=quantity)
 
 # The sell page reference
 @app.route('/update', methods=['POST'])
 def update_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    price = request.form.get('price')
+    expiration_date = request.form.get('expiration_date')
     # templates are stored in the templates folder
-    return render_template('update.html', message='')
+    return render_template('sell.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)
