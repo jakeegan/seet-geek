@@ -57,15 +57,14 @@ def new_ticket():
 
     new_ticket2 = Ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
     if not new_ticket2:
-        db.session.add(new_ticket)
+        db.session.add(new_ticket2)
         db.session.commit()
 
     return new_ticket2, new_ticket
 
 # Return ticket
 def get_all_tickets():
-    tickets = []
-    tickets = db.session.query(Ticket).first()
+    tickets = Ticket.query.all()
     return tickets
 
 def get_balance():
