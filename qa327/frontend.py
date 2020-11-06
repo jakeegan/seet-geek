@@ -22,6 +22,7 @@ def register_post():
     name = request.form.get('name')
     password = request.form.get('password')
     password2 = request.form.get('password2')
+    balance = 10
     error_message = None
 
 
@@ -37,7 +38,7 @@ def register_post():
         user = bn.get_user(email)
         if user:
             error_message = "User exists"
-        elif not bn.register_user(email, name, password, password2):
+        elif not bn.register_user(email, name, password, password2, balance):
             error_message = "Failed to store user info."
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
