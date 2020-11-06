@@ -40,6 +40,8 @@ def register_user(email, name, password, password2):
     :return: an error message if there is any, or None if register succeeds
     """
 
+    # TODO Register user section
+    
     hashed_pw = generate_password_hash(password, method='sha256')
     # store the encrypted password rather than the plain password
     new_user = User(email=email, name=name, password=hashed_pw)

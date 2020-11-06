@@ -13,8 +13,9 @@ The html templates are stored in the 'templates' folder.
 @app.route('/register', methods=['GET'])
 def register_get():
     # templates are stored in the templates folder
+    if 'logged_in' in session:
+        return redirect('/')
     return render_template('register.html', message='')
-
 
 @app.route('/register', methods=['POST'])
 def register_post():
@@ -24,19 +25,40 @@ def register_post():
     password2 = request.form.get('password2')
     error_message = None
 
-
     if password != password2:
         error_message = "The passwords do not match"
 
+    # TODO R2.5.5 Email address validation 
     elif len(email) < 1:
         error_message = "Email format error"
 
-    elif len(password) < 1:
-        error_message = "Password not strong enough"
+    # Username validation
+    elif not name:
+        error_message = "Username cannot be blank"
+    elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
+        error_message = "Username must be alphanumeric"
+    elif name.endswith(' ') or name.startswith(' '):
+        error_message = "Username cannot contain leading spaces"
+    elif len(name) < 2:
+        error_message = "Username must be longer than 2 characters"
+    elif len(name) >= 20:
+        error_message = "Username must be less than 20 characters."
+
+    # Password Validation
+    elif len(password) < 6:
+        error_message = "Password must be 6 or more characters"
+    elif not set('[~!@#$%^&*()_+{}":;\']+$').intersection(password):
+        error_message = "Password must contain at least one special character"
+    elif not any(c.isupper() for c in password):
+        error_message = "Password must contain at least one upper case character"
+    elif not any(c.islower() for c in password): 
+        error_message = "Password must contain at least one lower case character"
+
+    # All checks passed, do final validation and send it
     else:
         user = bn.get_user(email)
         if user:
-            error_message = "User exists"
+            error_message = "This email has already been used"
         elif not bn.register_user(email, name, password, password2):
             error_message = "Failed to store user info."
     # if there is any error messages when registering new user
