@@ -128,7 +128,6 @@ def profile(user):
     bn.add_new_ticket(name="test_ticket",quantity=10,price=20,expiration_date=20201231)
     bn.add_new_ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
     tickets = bn.get_all_tickets()
-    print (tickets)
     return render_template('index.html', user=user, ticket=tickets)
 
 # The sell page reference
@@ -157,4 +156,4 @@ def update_post():
     price = request.form.get('price')
     expiration_date = request.form.get('expiration_date')
     # templates are stored in the templates folder
-    return render_template('sell.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)
+    return render_template('update.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)

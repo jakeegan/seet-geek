@@ -39,7 +39,6 @@ def register_user(email, name, password, password2):
     :param password2: another password input to make sure the input is correct
     :return: an error message if there is any, or None if register succeeds
     """
-
     hashed_pw = generate_password_hash(password, method='sha256')
     # store the encrypted password rather than the plain password
     new_user = User(email=email, name=name, password=hashed_pw)
@@ -51,7 +50,9 @@ def register_user(email, name, password, password2):
 # Creating new ticket to database
 def add_new_ticket(name,quantity,price,expiration_date):
     new_ticket = Ticket(name=name,quantity=quantity,price=price,expiration_date=expiration_date)
-    if not Ticket.query.filter_by(name=new_ticket.name).count():
+    if new_ticket.expiration_date < 20200831:
+        return None
+    elif not Ticket.query.filter_by(name=new_ticket.name).count():
         db.session.add(new_ticket)
         db.session.commit()
 

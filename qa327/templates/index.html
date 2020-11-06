@@ -4,6 +4,7 @@
 <h1>{% block title %}Profile{% endblock %}</h1>
 {% endblock %}
 
+<!-- Header info -->
 {% block content %}
 <h2 id="welcome-header">Hello {{ user.name }}</h2>
 
@@ -24,6 +25,7 @@
             Name: {{ tickets.name }} <br> 
             Price: {{ tickets.price }} <br>
             Quantity: {{tickets.quantity}} <br>
+            Expiration Date: {{ tickets.expiration_date }}
         </h4>
     </div>
 {% endfor %}
@@ -82,7 +84,7 @@
 </form>
 
 
-<!-- JavaScript code to control buttons-->
+<!-- JavaScript code to control form buttons-->
 <script>
     function openFormSell(){
         var x = document.getElementById("sellForm");
