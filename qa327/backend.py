@@ -49,18 +49,13 @@ def register_user(email, name, password, password2):
     return None
 
 # Creating new ticket to database
-def new_ticket():
-    new_ticket = Ticket(name="test_ticket",quantity=10,price=20,expiration_date=20201231)
-    if not new_ticket:
+def add_new_ticket(name,quantity,price,expiration_date):
+    new_ticket = Ticket(name=name,quantity=quantity,price=price,expiration_date=expiration_date)
+    if not Ticket.query.filter_by(name=new_ticket.name).count():
         db.session.add(new_ticket)
         db.session.commit()
 
-    new_ticket2 = Ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
-    if not new_ticket2:
-        db.session.add(new_ticket2)
-        db.session.commit()
-
-    return new_ticket2, new_ticket
+    return None
 
 # Return ticket
 def get_all_tickets():
