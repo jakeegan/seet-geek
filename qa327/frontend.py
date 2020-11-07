@@ -170,7 +170,7 @@ def sell_post():
     # templates are stored in the templates folder
     return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
 
-# The sell page reference
+# The buy page reference
 @app.route('/buy', methods=['POST'])
 def buy_post():
     name = request.form.get('name')
@@ -178,7 +178,7 @@ def buy_post():
     # templates are stored in the templates folder
     return render_template('buy.html', name=name, quantity=quantity)
 
-# The sell page reference
+# The update page reference
 @app.route('/update', methods=['POST'])
 def update_post():
     name = request.form.get('name')

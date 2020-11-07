@@ -102,7 +102,7 @@ def check_password(password):
     contains_upper = False
     contains_lower = False
     contains_special = False
-    if password == "" or len(password) < 6:
+    if len(password) < 6:
         return False
     for ch in password:
         if ch.isupper():
