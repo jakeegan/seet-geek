@@ -139,7 +139,7 @@ def sell_post():
     price = request.form.get('price')
     expiration_date = request.form.get('expiration_date')
     # templates are stored in the templates folder
-    return render_template('sell.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)
+    return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
 
 # The sell page reference
 @app.route('/buy', methods=['POST'])
@@ -147,7 +147,7 @@ def buy_post():
     name = request.form.get('name')
     quantity = request.form.get('quantity')
     # templates are stored in the templates folder
-    return render_template('buy.html', variable1=name, variable2=quantity)
+    return render_template('buy.html', name=name, quantity=quantity)
 
 # The sell page reference
 @app.route('/update', methods=['POST'])
@@ -157,4 +157,4 @@ def update_post():
     price = request.form.get('price')
     expiration_date = request.form.get('expiration_date')
     # templates are stored in the templates folder
-    return render_template('update.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)
+    return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)

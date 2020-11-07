@@ -47,8 +47,15 @@ def register_user(email, name, password, password2, balance):
     db.session.commit()
     return None
 
-# Creating new ticket to database
 def add_new_ticket(name,quantity,price,expiration_date):
+    """
+    Create new ticket to database
+    :param name: the name of the ticket
+    :param quantity: the quantity of tickets
+    :param price: the price of the ticket
+    :param expiration_date: the expiration date of the ticket
+    :return: returns None
+    """
     new_ticket = Ticket(name=name,quantity=quantity,price=price,expiration_date=expiration_date)
     if new_ticket.expiration_date < 20200831:
         return None
@@ -58,8 +65,12 @@ def add_new_ticket(name,quantity,price,expiration_date):
 
     return None
 
-# Return ticket
+
 def get_all_tickets():
+    """
+    Returns all the user's tickets
+    :return: all the tickets
+    """
     tickets = Ticket.query.all()
     return tickets
 
