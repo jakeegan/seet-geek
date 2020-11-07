@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Sell{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h1>Sell</h1>
+<body>
+    <p>
+        Ticket Name: {{ variable1 }} <br>
+        Ticket Quantity: {{ variable2 }} <br>
+        Ticket Price: {{ variable3 }} <br>
+        Ticket Expiration Date: {{ variable4 }} <br>
+    </p>
+</body>
+
+<a href='/'>Return Home</a>
+{% endblock %}

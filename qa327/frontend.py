@@ -22,6 +22,7 @@ def register_post():
     name = request.form.get('name')
     password = request.form.get('password')
     password2 = request.form.get('password2')
+    balance = 10
     error_message = None
 
 
@@ -37,7 +38,7 @@ def register_post():
         user = bn.get_user(email)
         if user:
             error_message = "User exists"
-        elif not bn.register_user(email, name, password, password2):
+        elif not bn.register_user(email, name, password, password2, balance):
             error_message = "Failed to store user info."
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
@@ -125,5 +126,35 @@ def profile(user):
     # by using @authenticate, we don't need to re-write
     # the login checking code all the time for other
     # front-end portals
+    bn.add_new_ticket(name="test_ticket",quantity=10,price=20,expiration_date=20201231)
+    bn.add_new_ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
     tickets = bn.get_all_tickets()
-    return render_template('index.html', user=user, tickets=tickets)
+    return render_template('index.html', user=user, ticket=tickets)
+
+# The sell page reference
+@app.route('/sell', methods=['POST'])
+def sell_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    price = request.form.get('price')
+    expiration_date = request.form.get('expiration_date')
+    # templates are stored in the templates folder
+    return render_template('sell.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)
+
+# The sell page reference
+@app.route('/buy', methods=['POST'])
+def buy_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    # templates are stored in the templates folder
+    return render_template('buy.html', variable1=name, variable2=quantity)
+
+# The sell page reference
+@app.route('/update', methods=['POST'])
+def update_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    price = request.form.get('price')
+    expiration_date = request.form.get('expiration_date')
+    # templates are stored in the templates folder
+    return render_template('update.html', variable1=name, variable2=quantity, variable3=price, variable4=expiration_date)

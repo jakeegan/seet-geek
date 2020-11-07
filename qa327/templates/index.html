@@ -4,19 +4,130 @@
 <h1>{% block title %}Profile{% endblock %}</h1>
 {% endblock %}
 
+<!-- Header info -->
 {% block content %}
-<h2 id="welcome-header">Welcome {{ user.name }} !</h2>
+<h2 id="welcome-header">Hello {{ user.name }}</h2>
 
-
-<h2 >Here are all available tickets</h2>
-
-<div id="tickets">
-{% for ticket in tickets %}
+<!-- User Balance Information -->
+<div id="balance">
     <div>
-        <h4>{{ ticket.name }} {{ ticket.price }}</h4>
+        <h4>Available balance: ${{ user.balance }}</h4>
     </div>
-{% endfor %}
 </div>
 
+<!-- Ticket information -->
+<h2 >Here are all available tickets</h2>
+<div id="tickets">
+{% if ticket.length == 1 %}
+    <div>
+        <h4>
+        Owners Email: {{ user.email }} <br>
+        Name: {{ tickets.name }} <br> 
+        Price: {{ tickets.price }} <br>
+        Quantity: {{tickets.quantity}} <br>
+        Expiration Date: {{ tickets.expiration_date }}
+        </h4>
+    </div>
+{% endif %}
+
+{% if ticket.length != 1 %}
+{% for tickets in ticket %}
+    <div>
+        <h4>
+            Owners Email: {{ user.email }} <br>
+            Name: {{ tickets.name }} <br> 
+            Price: {{ tickets.price }} <br>
+            Quantity: {{tickets.quantity}} <br>
+            Expiration Date: {{ tickets.expiration_date }}
+        </h4>
+    </div>
+{% endfor %}
+{% endif %}
+</div>
+
+<!-- Sell Form --> 
+<button onclick="openFormSell()">Sell Form</button>
+<form action="/sell" id="sellForm" style="display:none" method="post">
+    <label for="name">Ticket Name:</label>
+    <input type="text" id="name" name="name" value="Type here">
+    <br>
+    <label for="quantity">Ticket Quantity:</label>
+    <input type="text" id="quantity" name="quantity" value="Type here">
+    <br>
+    <label for="price">Ticket Price:</label>
+    <input type="text" id="price" name="price" value="Type here">
+    <br>
+    <label for="expiration_date">Ticket Expiration Date:</label>
+    <input type="text" id="expiration_date" name="expiration_date" value="Type here">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+<br>
+<br>
+
+<!-- Buy Form --> 
+<button onclick="openFormBuy()">Buy Form</button>
+<form action="/buy" id="buyForm" style="display:none" method="post">
+    <label for="name">Ticket Name:</label>
+    <input type="text" id="name" name="name" value="Type here">
+    <br>
+    <label for="quantity">Ticket Quantity:</label>
+    <input type="text" id="quantity" name="quantity" value="Type here">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+<br>
+<br>
+
+<!-- Update Form --> 
+<button onclick="openFormUpdate()">Update Form</button>
+<form  action="/update" id="updateForm" style="display:none" method="post">
+    <label for="name">Ticket Name:</label>
+    <input type="text" id="name" name="name" value="Type here">
+    <br>
+    <label for="quantity">Ticket Quantity:</label>
+    <input type="text" id="quantity" name="quantity" value="Type here">
+    <br>
+    <label for="price">Ticket Price:</label>
+    <input type="text" id="price" name="price" value="Type here">
+    <br>
+    <label for="expiration_date">Ticket Expiration Date:</label>
+    <input type="text" id="expiration_date" name="expiration_date" value="Type here">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+
+<!-- JavaScript code to control form buttons-->
+<script>
+    function openFormSell(){
+        var x = document.getElementById("sellForm");
+        if (x.style.display === "none"){
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function openFormBuy(){
+        var x = document.getElementById("buyForm");
+        if (x.style.display === "none"){
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function openFormUpdate(){
+        var x = document.getElementById("updateForm");
+        if (x.style.display === "none"){
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
+<br>
+<br>
 <a href='/logout'>logout</a>
 {% endblock %}
+
