@@ -18,6 +18,19 @@
 <!-- Ticket information -->
 <h2 >Here are all available tickets</h2>
 <div id="tickets">
+{% if ticket.length == 1 %}
+    <div>
+        <h4>
+        Owners Email: {{ user.email }} <br>
+        Name: {{ tickets.name }} <br> 
+        Price: {{ tickets.price }} <br>
+        Quantity: {{tickets.quantity}} <br>
+        Expiration Date: {{ tickets.expiration_date }}
+        </h4>
+    </div>
+{% endif %}
+
+{% if ticket.length != 1 %}
 {% for tickets in ticket %}
     <div>
         <h4>
@@ -29,6 +42,7 @@
         </h4>
     </div>
 {% endfor %}
+{% endif %}
 </div>
 
 <!-- Sell Form --> 
