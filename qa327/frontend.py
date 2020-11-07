@@ -150,6 +150,7 @@ def sell_post():
         # templates are stored in the templates folder
         return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
+        flash('You cannot access /sell while being logged out')
         return redirect('/login')
 
 # The sell page reference
@@ -161,8 +162,8 @@ def buy_post():
         # templates are stored in the templates folder
         return render_template('buy.html', name=name, quantity=quantity)
     else:
+        flash('You cannot access /buy while being logged out')
         return redirect('/login')
-        flash('You are not logged in')
 
 # The sell page reference
 @app.route('/update', methods=['GET', 'POST'])
@@ -175,4 +176,5 @@ def update_post():
         # templates are stored in the templates folder
         return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
+        flash('You cannot access /update while being logged out')
         return redirect('/login')

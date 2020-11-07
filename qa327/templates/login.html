@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
 <h1>{% block title %}Log In{% endblock %}</h1>
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
 <h4 id='message'>{{message}}</h4>
 <form method="post">
   <div class="form-group">
@@ -13,4 +21,5 @@
   </div>
 </form>
 <a href='/register'>Register</a>
+{% endwith %}
 {% endblock %}
