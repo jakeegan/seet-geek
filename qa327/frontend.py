@@ -23,23 +23,24 @@ def register_post():
     name = request.form.get('name')
     password = request.form.get('password')
     password2 = request.form.get('password2')
-    balance = 10
+    balance = 5000
     error_message = None
 
     if password != password2:
-        error_message = "The passwords do not match"
+        error_message = "Passwords must match"
 
-    # TODO R2.5.5 Email address validation 
-    elif len(email) < 1:
-        error_message = "Email format error"
+    elif not bn.check_email(email):
+        error_message = "Email format is not valid"
 
     # Username validation
     elif not name:
         error_message = "Username cannot be blank"
     elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
         error_message = "Username must be alphanumeric"
-    elif name.endswith(' ') or name.startswith(' '):
+    elif name.startswith(' '):
         error_message = "Username cannot contain leading spaces"
+    elif name.endswith(' '):
+        error_message = "Username cannot contain trailing spaces"
     elif len(name) < 2:
         error_message = "Username must be longer than 2 characters"
     elif len(name) >= 20:
@@ -60,8 +61,9 @@ def register_post():
         user = bn.get_user(email)
         if user:
             error_message = "This email has already been used"
-        elif not bn.register_user(email, name, password, password2):
-            error_message = "Failed to store user info."
+        
+        error_message = bn.register_user(email, name, password, password2, balance)
+
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
     if error_message:

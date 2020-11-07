@@ -1,6 +1,7 @@
 from qa327.models import db, User, Ticket
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
+from sqlalchemy import exc
 
 """
 This file defines all backend logic that interacts with database and other services
@@ -41,14 +42,16 @@ def register_user(email, name, password, password2, balance):
     :return: an error message if there is any, or None if register succeeds
     """
 
-    # TODO Register user section
-    
     hashed_pw = generate_password_hash(password, method='sha256')
     # store the encrypted password rather than the plain password
     new_user = User(email=email, name=name, password=hashed_pw, balance=balance)
 
-    db.session.add(new_user)
-    db.session.commit()
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+    except exc.SQLAlchemyError as e:
+        return(e._message)
+
     return None
 
 def add_new_ticket(name,quantity,price,expiration_date):
