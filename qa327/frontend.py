@@ -23,6 +23,7 @@ def register_post():
     name = request.form.get('name')
     password = request.form.get('password')
     password2 = request.form.get('password2')
+    balance = 10
     error_message = None
 
     if password != password2:
@@ -71,13 +72,18 @@ def register_post():
 
 @app.route('/login', methods=['GET'])
 def login_get():
-    return render_template('login.html', message='Please login')
+    if 'logged_in' in session:
+        return redirect('/')
+    else:
+        return render_template('login.html', message='Please login')
 
 
 @app.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
+    if not bn.check_email(email) or not bn.check_password(password):
+        return render_template('login.html', message='email/password format is incorrect.')
     user = bn.login_user(email, password)
     if user:
         session['logged_in'] = user.email
@@ -95,7 +101,7 @@ def login_post():
         # code 303 is to force a 'GET' request
         return redirect('/', code=303)
     else:
-        return render_template('login.html', message='login failed')
+        return render_template('login.html', message='email/password combination incorrect')
 
 
 @app.route('/logout')
@@ -147,5 +153,35 @@ def profile(user):
     # by using @authenticate, we don't need to re-write
     # the login checking code all the time for other
     # front-end portals
+    bn.add_new_ticket(name="test_ticket",quantity=10,price=20,expiration_date=20201231)
+    bn.add_new_ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
     tickets = bn.get_all_tickets()
-    return render_template('index.html', user=user, tickets=tickets)
+    return render_template('index.html', user=user, ticket=tickets)
+
+# The sell page reference
+@app.route('/sell', methods=['POST'])
+def sell_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    price = request.form.get('price')
+    expiration_date = request.form.get('expiration_date')
+    # templates are stored in the templates folder
+    return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
+
+# The sell page reference
+@app.route('/buy', methods=['POST'])
+def buy_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    # templates are stored in the templates folder
+    return render_template('buy.html', name=name, quantity=quantity)
+
+# The sell page reference
+@app.route('/update', methods=['POST'])
+def update_post():
+    name = request.form.get('name')
+    quantity = request.form.get('quantity')
+    price = request.form.get('price')
+    expiration_date = request.form.get('expiration_date')
+    # templates are stored in the templates folder
+    return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
