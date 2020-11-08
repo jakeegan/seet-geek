@@ -80,40 +80,86 @@ def get_all_tickets():
     """
     tickets = Ticket.query.all()
     return tickets
+    
+def check_registration(email, name, password1, password2):
+    """
+    Check if all the registration data is valid
+    :param email: the email of the user
+    :param name: username of the user
+    :param password1: first password of the user
+    :param password2: second password of the user
+    :return: true if the registration is valid, false if the registration is invalid
+    :return: error message if there is any
+    """
+    error = None
+    
+    # Validate email, name, and password
+    email_ret, email_error = check_email(email)
+    name_ret, name_error = check_username(name)
+    password_ret, password_error = check_password(password1)
+    
+    if password1 != password2:
+        error = "Passwords must match"
+    elif not email_ret:
+        error = email_error
+    elif not name_ret:
+        error = name_error
+    elif not password_ret:
+        error = password_error
+    return not error, error
 
+    
+def check_username(name):
+    """
+    Check if the username is valid
+    :param name: the username of the user
+    :return: true if the name is valid, false if the name is invalid
+    :return: error message if there is any
+    """
+    error = None
+    if name == "":
+        error = "Username cannot be blank"
+    elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
+        error = "Username must be alphanumeric"
+    elif name.startswith(' '):
+        error = "Username cannot contain leading spaces"
+    elif name.endswith(' '):
+        error = "Username cannot contain trailing spaces"
+    elif len(name) < 2:
+        error = "Username must be longer than 2 characters"
+    elif len(name) >= 20:
+        error = "Username must be less than 20 characters."
+    return not error, error
+    
 def check_email(email):
     """
-    Check if the email is valid (RFC 5322)
+    Check if the email is valid according to RFC 5322
     :param email: the email of the user
     :return: true if the email is valid, false if the email is invalid
+    :return: error message if there is any
     """
+    error = None
     email_rules = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
-    if email != "" and re.search(email_rules, email):
-        return True
-    else:
-        return False
+    if email == "":
+        error = "Email is empty"
+    elif not re.search(email_rules, email):
+        error = "Invalid email"
+    return not error, error
     
 def check_password(password):
     """
     Check if the password is valid
     :param password: the password of the user
     :return: true if the password is valid, false if the password is invalid
+    :return: error message if there is any
     """
-    contains_upper = False
-    contains_lower = False
-    contains_special = False
+    error = None
     if len(password) < 6:
-        return False
-    for ch in password:
-        if ch.isupper():
-            contains_upper = True
-        elif ch.islower():
-            contains_lower = True
-        elif not ch.isalnum():
-            contains_special = True
-    if contains_upper and contains_lower and contains_special:
-        return True
-    else:
-        return False
-
-
+        error = "Password must be 6 or more characters"
+    elif not set('[~!@#$%^&*()_+{}":;\']+$').intersection(password):
+        error = "Password must contain at least one special character"
+    elif not any(c.isupper() for c in password):
+        error = "Password must contain at least one upper case character"
+    elif not any(c.islower() for c in password): 
+        error = "Password must contain at least one lower case character"
+    return not error, error    
