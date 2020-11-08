@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, flash
 from qa327 import app
 import qa327.backend as bn
 
@@ -9,6 +9,9 @@ http requests from the client (browser) through templating.
 The html templates are stored in the 'templates' folder. 
 """
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html', message='')
 
 @app.route('/register', methods=['GET'])
 def register_get():
@@ -161,29 +164,41 @@ def profile(user):
     return render_template('index.html', user=user, ticket=tickets)
 
 # The sell page reference
-@app.route('/sell', methods=['POST'])
+@app.route('/sell', methods=['GET', 'POST'])
 def sell_post():
-    name = request.form.get('name')
-    quantity = request.form.get('quantity')
-    price = request.form.get('price')
-    expiration_date = request.form.get('expiration_date')
-    # templates are stored in the templates folder
-    return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
+    if 'logged_in' in session:
+        name = request.form.get('name')
+        quantity = request.form.get('quantity')
+        price = request.form.get('price')
+        expiration_date = request.form.get('expiration_date')
+        # templates are stored in the templates folder
+        return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
+    else:
+        flash('You cannot access /sell while being logged out')
+        return redirect('/login')
 
-# The buy page reference
-@app.route('/buy', methods=['POST'])
+
+@app.route('/buy', methods=['GET', 'POST'])
 def buy_post():
-    name = request.form.get('name')
-    quantity = request.form.get('quantity')
-    # templates are stored in the templates folder
-    return render_template('buy.html', name=name, quantity=quantity)
+    if 'logged_in' in session:
+        name = request.form.get('name')
+        quantity = request.form.get('quantity')
+        # templates are stored in the templates folder
+        return render_template('buy.html', name=name, quantity=quantity)
+    else:
+        flash('You cannot access /buy while being logged out')
+        return redirect('/login')
 
-# The update page reference
-@app.route('/update', methods=['POST'])
+
+@app.route('/update', methods=['GET', 'POST'])
 def update_post():
-    name = request.form.get('name')
-    quantity = request.form.get('quantity')
-    price = request.form.get('price')
-    expiration_date = request.form.get('expiration_date')
-    # templates are stored in the templates folder
-    return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
+    if 'logged_in' in session:
+        name = request.form.get('name')
+        quantity = request.form.get('quantity')
+        price = request.form.get('price')
+        expiration_date = request.form.get('expiration_date')
+        # templates are stored in the templates folder
+        return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
+    else:
+        flash('You cannot access /update while being logged out')
+        return redirect('/login')
