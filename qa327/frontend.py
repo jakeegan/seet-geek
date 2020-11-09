@@ -22,49 +22,24 @@ def register_get():
 
 @app.route('/register', methods=['POST'])
 def register_post():
+    # Retrieve data from user
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
     password2 = request.form.get('password2')
     balance = 5000
     error_message = None
-
-    if password != password2:
-        error_message = "Passwords must match"
-
-    elif not bn.check_email(email):
-        error_message = "Email format is not valid"
-
-    # Username validation
-    elif not name:
-        error_message = "Username cannot be blank"
-    elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
-        error_message = "Username must be alphanumeric"
-    elif name.startswith(' '):
-        error_message = "Username cannot contain leading spaces"
-    elif name.endswith(' '):
-        error_message = "Username cannot contain trailing spaces"
-    elif len(name) < 2:
-        error_message = "Username must be longer than 2 characters"
-    elif len(name) >= 20:
-        error_message = "Username must be less than 20 characters."
-
-    # Password Validation
-    elif len(password) < 6:
-        error_message = "Password must be 6 or more characters"
-    elif not set('[~!@#$%^&*()_+{}":;\']+$').intersection(password):
-        error_message = "Password must contain at least one special character"
-    elif not any(c.isupper() for c in password):
-        error_message = "Password must contain at least one upper case character"
-    elif not any(c.islower() for c in password): 
-        error_message = "Password must contain at least one lower case character"
-
-    # All checks passed, do final validation and send it
+    
+    # Validate user registration
+    registration_ret, registration_error = bn.check_registration(email, name, password, password2)
+    
+    if not registration_ret:
+        error_message = registration_error
+    # Check if user already exists
     else:
         user = bn.get_user(email)
         if user:
             error_message = "This email has already been used"
-        
         error_message = bn.register_user(email, name, password, password2, balance)
 
     # if there is any error messages when registering new user
@@ -77,6 +52,7 @@ def register_post():
 
 @app.route('/login', methods=['GET'])
 def login_get():
+    # If user is already logged in, send them to index, otherwise send them to login
     if 'logged_in' in session:
         return redirect('/')
     else:
@@ -85,9 +61,15 @@ def login_get():
 
 @app.route('/login', methods=['POST'])
 def login_post():
+    # Retrieve data from user
     email = request.form.get('email')
     password = request.form.get('password')
-    if not bn.check_email(email) or not bn.check_password(password):
+    
+    # Validate email and password
+    email_ret, email_error = bn.check_email(email)
+    password_ret, password_error = bn.check_password(password)
+    
+    if not email_ret or not password_ret:
         return render_template('login.html', message='email/password format is incorrect.')
     user = bn.login_user(email, password)
     if user:
@@ -111,6 +93,7 @@ def login_post():
 
 @app.route('/logout')
 def logout():
+    # log user out if they are logged in
     if 'logged_in' in session:
         session.pop('logged_in', None)
     return redirect('/')
@@ -163,7 +146,6 @@ def profile(user):
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, ticket=tickets)
 
-# The sell page reference
 @app.route('/sell', methods=['GET', 'POST'])
 def sell_post():
     if 'logged_in' in session:
