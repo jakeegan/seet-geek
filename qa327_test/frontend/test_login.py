@@ -6,7 +6,9 @@ from unittest.mock import patch
 from qa327.models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# Test case R1.1 - If the user hasn't logged in, show the login page
 class TestCaseOne_One(BaseCase):
+    # Test Case R1.1.1 - If the user navigates to /
     def testcase_one_one_one(self):
         self.open(base_url + '/logout')
         self.open(base_url)
