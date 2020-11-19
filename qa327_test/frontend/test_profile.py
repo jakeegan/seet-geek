@@ -7,9 +7,9 @@ from qa327.models import db, User, Ticket
 from werkzeug.security import generate_password_hash, check_password_hash
 
 test_user = User(
-    email='test_frontend@test.com',
+    email='testing@test.com',
     name='Test',
-    password='Testing!'
+    password=generate_password_hash('Testing!')
 )
 test_update = Ticket(
     name='update_ticket',
@@ -41,7 +41,7 @@ class TestCase3_1(BaseCase):
     def testcase3_1_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email","test_frontend@test.com")
+        self.type("#email","testing@test.com")
         self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element('#welcome-header')
@@ -52,11 +52,11 @@ class TestCase3_2(BaseCase):
     def testcase3_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#welcome-header")
-        self.assert_text("Hi test_frontend","#welcome-header")
+        self.assert_text("Hi Test","#welcome-header")
 
 # Test case 3.3 - This page shows user balance
 class TestCase3_3(BaseCase):
@@ -64,8 +64,8 @@ class TestCase3_3(BaseCase):
     def testcase3_3(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#balance")
 
@@ -75,8 +75,8 @@ class TestCase3_4(BaseCase):
     def testcase3_4(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.click_link_text('logout')
 
@@ -88,48 +88,52 @@ class TestCase3_5(BaseCase):
     def testcase3_5_1(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#tickets")
 
     # Test Case R3.5.2 - Information of quantity of each ticket
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_5_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#tickets")
         self.assert_text("Quantity: 10","#tickets")
 
     # Test Case R3.5.3 - Information of ticket owner's email
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_5_3(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#tickets")
-        self.assert_text("Owners Email: test_frontend@test.com","#tickets")
+        self.assert_text("Owners Email: testing@test.com","#tickets")
 
     # Test Case R3.5.4 - Information of the price of the tickets
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testscase3_5_4(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#tickets")
         self.assert_text("Price: 20","#tickets")
 
     # Test Case R3.5.5/R3.5.6 - Expired tickets do not show
     # NOT DONE 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_5_5(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
 
 # Test case R3.6 - This page contains a form that a user can submit new tickets for sale.
@@ -139,8 +143,8 @@ class TestCase3_6(BaseCase):
     def testcase3_6(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#sell_form').click()
         self.assert_element("#name")
@@ -155,8 +159,8 @@ class TestCase3_7(BaseCase):
     def testcase3_7(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#buy_form').click()
         self.assert_element("#bname")
@@ -169,8 +173,8 @@ class TestCase3_8(BaseCase):
     def testcase3_8(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#update_form').click()
         self.assert_element("#uname")
@@ -184,8 +188,8 @@ class TestCase3_9(BaseCase):
     def testcase3_9(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#sell_form').click()
         self.type("#name","sell_ticket")
@@ -205,8 +209,8 @@ class TestCase3_10(BaseCase):
     def testcase3_10(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#buy_form').click()
         self.type("#bname","buy_ticket")
@@ -222,8 +226,8 @@ class TestCase3_11(BaseCase):
     def testcase3_11(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
-        self.type("#email",test_user.email)
-        self.type("#password",test_user.password)
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#update_form').click()
         self.type("#uname","update_ticket")
