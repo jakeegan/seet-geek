@@ -143,7 +143,7 @@ def check_email(email):
     if email == "":
         error = "Email is empty"
     elif not re.search(email_rules, email):
-        error = "Invalid email"
+        error = "Email format is invalid"
     return not error, error
     
 def check_password(password):
