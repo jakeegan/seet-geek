@@ -6,15 +6,15 @@ from unittest.mock import patch
 from qa327.models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Test case R1.1 - If the user hasn't logged in, show the login page
 test_user = User(
     email='testing@test.com',
     name='Test',
     password=generate_password_hash('Testing!')
 )
 
+# Test Case R8.1 - For any other requests except the ones above, the system should return a 404 error
 class TestCase8_1(BaseCase):
-    # Test Case R1.1.1 - If the user navigates to /
+    
     @patch('qa327.backend.get_user', return_value=test_user)
     def testcase8_1_1(self, *_):
         self.open(base_url + '/login')
