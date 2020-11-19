@@ -11,6 +11,18 @@ test_user = User(
     name='Test',
     password=generate_password_hash('Testing!')
 )
+test_ticket = Ticket(
+    name='test_ticket_yo',
+    quantity='10',
+    price='10',
+    expiration_date=20201201
+)
+test_ticket_old = Ticket(
+    name='test_ticket_old',
+    quantity='10',
+    price='10',
+    expiration_date=20101101
+)
 test_update = Ticket(
     name='update_ticket',
     quantity='10',
@@ -126,8 +138,7 @@ class TestCase3_5(BaseCase):
         self.assert_element("#tickets")
         self.assert_text("Price: 20","#tickets")
 
-    # Test Case R3.5.5/R3.5.6 - Expired tickets do not show
-    # NOT DONE 
+    # Test Case R3.5.5/R3.5.6 - Expired tickets do not show 
     @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_5_5(self, *_):
         self.open(base_url + '/logout')
@@ -135,6 +146,8 @@ class TestCase3_5(BaseCase):
         self.type("#email","testing@test.com")
         self.type("#password","Testing!")
         self.click('input[type="submit"]')
+        self.assert_element("#tickets")
+        self.assert_false(self.is_text_visible("Name: test_ticket_old"))
 
 # Test case R3.6 - This page contains a form that a user can submit new tickets for sale.
 # Fields: name, quantity, price, expiration date

@@ -19,19 +19,31 @@
 <h2 >Here are all available tickets</h2>
 <div id="tickets">
 {% if ticket.length == 1 %}
+    {% if ticket.expiration_date > 20201031 %}
     <div>
         <h4>
         Owners Email: {{ user.email }} <br>
-        Name: {{ tickets.name }} <br> 
-        Price: {{ tickets.price }} <br>
-        Quantity: {{tickets.quantity}} <br>
-        Expiration Date: {{ tickets.expiration_date }}
+        Name: {{ ticket.name }} <br> 
+        Price: {{ ticket.price }} <br>
+        Quantity: {{ticket.quantity}} <br>
+        Expiration Date: {{ ticket.expiration_date }}
         </h4>
     </div>
+    {% endif %}
+    {% if 20201031 > ticket.expiration_date %}
+    <div>
+        <h4>
+        Owners Email: {{ user.email }} <br>
+        Name: {{ ticket.name }} <br>
+        Expiration Date: {{ ticket.expiration_date }}
+        </h4>
+    </div>
+    {% endif %}
 {% endif %}
 
 {% if ticket.length != 1 %}
 {% for tickets in ticket %}
+    {% if tickets.expiration_date > 20201031 %}
     <div>
         <h4>
             Owners Email: {{ user.email }} <br>
@@ -41,6 +53,16 @@
             Expiration Date: {{ tickets.expiration_date }}
         </h4>
     </div>
+    {% endif %}
+    {% if 20201031 > tickets.expiration_date %}
+    <div>
+        <h4>
+            Owners Email: {{ user.email }} <br>
+            Name: {{ tickets.name }} <br> 
+            Expiration Date: {{ tickets.expiration_date }}
+        </h4>
+    </div>
+    {% endif %}
 {% endfor %}
 {% endif %}
 </div>
