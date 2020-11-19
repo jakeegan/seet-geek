@@ -37,6 +37,7 @@ class TestCase3_1(BaseCase):
         self.assert_title("Log In")
 
     # Test Case R3.1.2 - If the user is logged in
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_1_2(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -47,6 +48,7 @@ class TestCase3_1(BaseCase):
     
 # Test case 3.2 - This page shows a header 'Hi {}'.format(user.name)
 class TestCase3_2(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_2(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -58,6 +60,7 @@ class TestCase3_2(BaseCase):
 
 # Test case 3.3 - This page shows user balance
 class TestCase3_3(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_3(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -68,6 +71,7 @@ class TestCase3_3(BaseCase):
 
 # Test case 3.4 - This page shows a logout link, pointing to /logout
 class TestCase3_4(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_4(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -79,6 +83,7 @@ class TestCase3_4(BaseCase):
 # Test case 3.5 - This page lists all available tickets. Information including the quantity of each ticket
 # the owner's email, and the price, for tickets that are not expired
 class TestCase3_5(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     # Test Case R3.5.1 - The page lists available tickets
     def testcase3_5_1(self):
         self.open(base_url + '/logout')
@@ -130,6 +135,7 @@ class TestCase3_5(BaseCase):
 # Test case R3.6 - This page contains a form that a user can submit new tickets for sale.
 # Fields: name, quantity, price, expiration date
 class TestCase3_6(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_6(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -145,6 +151,7 @@ class TestCase3_6(BaseCase):
 # Test case R3.7 - This page contains a form that a user can buy new tickets. 
 # Fields: name, quantity 
 class TestCase3_7(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_7(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -158,6 +165,7 @@ class TestCase3_7(BaseCase):
 # Test case R3.8 - This page contains a form that a user can update tickets. 
 # Fields: name, quantity, price, expiration date 
 class TestCase3_8(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_8(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -172,6 +180,7 @@ class TestCase3_8(BaseCase):
 
 # Test case R3.9 - The ticket-selling form can be posted to /sell
 class TestCase3_9(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_9(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -192,6 +201,7 @@ class TestCase3_9(BaseCase):
 
 # Test case R3.10 - The ticket-buying form can be posted to /buy
 class TestCase3_10(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_10(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -208,6 +218,7 @@ class TestCase3_10(BaseCase):
 
 # Test case R3.11 - The ticket-update form can be posted to /update
 class TestCase3_11(BaseCase):
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase3_11(self):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
