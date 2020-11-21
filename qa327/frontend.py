@@ -143,6 +143,7 @@ def profile(user):
     # front-end portals
     bn.add_new_ticket(name="test_ticket",quantity=10,price=20,expiration_date=20201231)
     bn.add_new_ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
+    bn.add_new_ticket(name="test_ticket_old",quantity=10,price=20,expiration_date=20101101)
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, ticket=tickets)
 
