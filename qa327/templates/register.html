@@ -6,6 +6,9 @@
 
 <!-- The register form -->
 {% block content %}
+
+<h2 id="register-header">Register</h2>
+
 <h4 id='message'>{{message}}</h4>
 <form method="post">
   <div class="form-group">
@@ -17,7 +20,7 @@
     <input class="form-control" type="password" name="password" id="password" required>
     <label for="password">Confirm Password</label>
     <input class="form-control" type="password" name="password2" id="password2" required>
-    <input class="btn btn-primary" type="submit" value="Register">
+    <input class="btn btn-primary" id="btn-submit" type="submit" value="Register">
   <a href='/login' class="btn btn-primary" id="btn-submit" >Login</a>
   </div>
 </form>
