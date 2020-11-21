@@ -11,7 +11,7 @@ The html templates are stored in the 'templates' folder.
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template('404.html', message='')
+    return render_template('404.html', message='Oops! Looks like you\'ve come to the wrong page ')
 
 @app.route('/register', methods=['GET'])
 def register_get():
