@@ -8,6 +8,8 @@
 {% block content %}
 <h2 id="welcome-header">Hi {{ user.name }}</h2>
 
+<h4 id='message'>{{message}}</h4>
+
 <!-- User Balance Information -->
 <div id="balance">
     <div>
@@ -71,16 +73,16 @@
 <button id="sell_form" onclick="openFormSell()">Sell Form</button>
 <form action="/sell" id="sellForm" style="display:none" method="post">
     <label for="name">Ticket Name:</label>
-    <input type="text" id="name" name="name" value="Type here">
+    <input type="text" id="name" name="name" value="">
     <br>
     <label for="quantity">Ticket Quantity:</label>
-    <input type="text" id="quantity" name="quantity" value="Type here">
+    <input type="text" id="quantity" name="quantity" value="">
     <br>
     <label for="price">Ticket Price:</label>
-    <input type="text" id="price" name="price" value="Type here">
+    <input type="text" id="price" name="price" value="">
     <br>
     <label for="expiration_date">Ticket Expiration Date:</label>
-    <input type="text" id="expiration_date" name="expiration_date" value="Type here">
+    <input type="text" id="expiration_date" name="expiration_date" value="">
     <br>
     <input type="submit" value="Submit">
 </form>
@@ -91,10 +93,10 @@
 <button id="buy_form" onclick="openFormBuy()">Buy Form</button>
 <form action="/buy" id="buyForm" style="display:none" method="post">
     <label for="name">Ticket Name:</label>
-    <input type="text" id="bname" name="name" value="Type here">
+    <input type="text" id="bname" name="name" value="">
     <br>
     <label for="quantity">Ticket Quantity:</label>
-    <input type="text" id="bquantity" name="quantity" value="Type here">
+    <input type="text" id="bquantity" name="quantity" value="">
     <br>
     <input id="bsubmit" type="submit" value="Submit">
 </form>
@@ -105,16 +107,16 @@
 <button id="update_form" onclick="openFormUpdate()">Update Form</button>
 <form  action="/update" id="updateForm" style="display:none" method="post">
     <label for="name">Ticket Name:</label>
-    <input type="text" id="uname" name="name" value="Type here">
+    <input type="text" id="uname" name="name" value="">
     <br>
     <label for="quantity">Ticket Quantity:</label>
-    <input type="text" id="uquantity" name="quantity" value="Type here">
+    <input type="text" id="uquantity" name="quantity" value="">
     <br>
     <label for="price">Ticket Price:</label>
-    <input type="text" id="uprice" name="price" value="Type here">
+    <input type="text" id="uprice" name="price" value="">
     <br>
     <label for="expiration_date">Ticket Expiration Date:</label>
-    <input type="text" id="uexpiration_date" name="expiration_date" value="Type here">
+    <input type="text" id="uexpiration_date" name="expiration_date" value="">
     <br>
     <input id="usubmit" type="submit" value="Submit">
 </form>

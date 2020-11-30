@@ -89,69 +89,69 @@ invalid_ticket_quantity2 = Ticket(
 
 Actions:
 
--open /logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_name1's name into element `#buy_name`
--enter invalid_ticket_name1's quantity into element `#buy_quantity`
--enter invalid_ticket_name1's price into element `#buy_price`
--enter invalid_ticket_name1's date into element `#buy_date`
--click element `#buy_submit`
--validate `#error-message` displays message `Ticket Name must be alphanumeric`
--open /logout
+- open /logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_name1's name into element `#buy_name`
+- enter invalid_ticket_name1's quantity into element `#buy_quantity`
+- enter invalid_ticket_name1's price into element `#buy_price`
+- enter invalid_ticket_name1's date into element `#buy_date`
+- click element `#buy_submit`
+- validate `#error-message` displays message `Ticket Name must be alphanumeric`
+- open /logout
 
 #### Test Case R6.1.2 - The name of the ticket does not have a space as the first character
 
--open logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_name2's name into element `#buy_name`
--enter invalid_ticket_name2's quantity into element `#buy_quantity`
--enter invalid_ticket_name2's price into element `#buy_price`
--enter invalid_ticket_name2's date into element `#buy_date`
--click element `input[type="submit"]`
--validate `#error-message` displays message `Ticket Name must not include a space at the beginning`
+- open logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_name2's name into element `#buy_name`
+- enter invalid_ticket_name2's quantity into element `#buy_quantity`
+- enter invalid_ticket_name2's price into element `#buy_price`
+- enter invalid_ticket_name2's date into element `#buy_date`
+- click element `input[type="submit"]`
+- validate `#error-message` displays message `Ticket Name must not include a space at the beginning`
 
 
 #### Test Case R6.1.3 - The name of the ticket does not have a space as the last character
 
 Actions:
 
--open /logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_name3's name into element `#buy_name`
--enter invalid_ticket_name3's quantity into element `#buy_quantity`
--enter invalid_ticket_name3's price into element `#buy_price`
--enter invalid_ticket_name3's date into element `#buy_date`
--click element `input[type="submit"]`
--validate `#error-message` displays message `Ticket Name must not include a space at the end`
+- open /logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_name3's name into element `#buy_name`
+- enter invalid_ticket_name3's quantity into element `#buy_quantity`
+- enter invalid_ticket_name3's price into element `#buy_price`
+- enter invalid_ticket_name3's date into element `#buy_date`
+- click element `input[type="submit"]`
+- validate `#error-message` displays message `Ticket Name must not include a space at the end`
 
 ### Test case R6.2 - The name of the ticket is no longer than 60 characters
 
 Actions:
 
--open /logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_name4's name into element `#buy_name`
--enter invalid_ticket_name4's quantity into element `#buy_quantity`
--enter invalid_ticket_name4's price into element `#buy_price`
--enter invalid_ticket_name4's date into element `#buy_date`
--click element `input[type="submit"]`
--validate `#error-message` displays message `Ticket Name must not be longer than 60 characters`
+- open /logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_name4's name into element `#buy_name`
+- enter invalid_ticket_name4's quantity into element `#buy_quantity`
+- enter invalid_ticket_name4's price into element `#buy_price`
+- enter invalid_ticket_name4's date into element `#buy_date`
+- click element `input[type="submit"]`
+- validate `#error-message` displays message `Ticket Name must not be longer than 60 characters`
 
 ### Test case R6.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100
 
@@ -159,35 +159,35 @@ Actions:
 
 Actions:
 
--open /logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_quantity1's name into element `#buy_name`
--enter invalid_ticket_quantity1's quantity into element `#buy_quantity`
--enter invalid_ticket_quantity1's price into element `#buy_price`
--enter invalid_ticket_quantity1's date into element `#buy_date`
--click element `input[type="submit"]`
--validate `#error-message` displays message `Ticket Quantity must be more than 0`
+- open /logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_quantity1's name into element `#buy_name`
+- enter invalid_ticket_quantity1's quantity into element `#buy_quantity`
+- enter invalid_ticket_quantity1's price into element `#buy_price`
+- enter invalid_ticket_quantity1's date into element `#buy_date`
+- click element `input[type="submit"]`
+- validate `#error-message` displays message `Ticket Quantity must be more than 0`
 
 #### Test Case R6.3.2 - The quantity of the tickets is less than or equal to 100
 
 Actions:
 
--open /logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_quantity2's name into element `#buy_name`
--enter invalid_ticket_quantity2's quantity into element `#buy_quantity`
--enter invalid_ticket_quantity2's price into element `#buy_price`
--enter invalid_ticket_quantity2's date into element `#buy_date`
--click element `input[type="submit"]`
--validate `#error-message` displays message `Ticket Quantity cannot be more than 100`
+- open /logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_quantity2's name into element `#buy_name`
+- enter invalid_ticket_quantity2's quantity into element `#buy_quantity`
+- enter invalid_ticket_quantity2's price into element `#buy_price`
+- enter invalid_ticket_quantity2's date into element `#buy_date`
+- click element `input[type="submit"]`
+- validate `#error-message` displays message `Ticket Quantity cannot be more than 100`
 
 ### Test case R6.4 - The ticket name exists in the database and the quantity is more than the quantity requested to buy
 
@@ -281,16 +281,16 @@ Actions:
 
 Actions:
 
--open /logout
--open /login
--enter test_user's email into element `#email`
--enter test_user's password into element `#password`
--click element `input[type="submit"]`
--open /
--enter invalid_ticket_name1's name into element `#buy_name`
--enter invalid_ticket_name1's quantity into element `#buy_quantity`
--enter invalid_ticket_name1's price into element `#buy_price`
--enter invalid_ticket_name1's date into element `#buy_date`
--click element `input[type="submit"]`
--validate page is redirected to /
--validate `#error-message` displays message `Ticket Date must be 8 characters long`
+- open /logout
+- open /login
+- enter test_user's email into element `#email`
+- enter test_user's password into element `#password`
+- click element `input[type="submit"]`
+- open /
+- enter invalid_ticket_name1's name into element `#buy_name`
+- enter invalid_ticket_name1's quantity into element `#buy_quantity`
+- enter invalid_ticket_name1's price into element `#buy_price`
+- enter invalid_ticket_name1's date into element `#buy_date`
+- click element `input[type="submit"]`
+- validate page is redirected to /
+- validate `#error-message` displays message `Ticket Date must be 8 characters long`

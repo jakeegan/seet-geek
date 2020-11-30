@@ -155,6 +155,15 @@ def sell_post():
         quantity = request.form.get('quantity')
         price = request.form.get('price')
         expiration_date = request.form.get('expiration_date')
+        # If an error to return to home page
+        tickets = bn.get_all_tickets()
+        email = session['logged_in']
+        user = bn.get_user(email)
+        #check ticket info
+        ticket_ret, ticket_error = bn.check_ticket(name,quantity,price,expiration_date)
+        # if ticket name not valid
+        if not ticket_ret:
+            return render_template('index.html', user=user,ticket=tickets, message=ticket_error)
         # templates are stored in the templates folder
         return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
@@ -167,6 +176,15 @@ def buy_post():
     if 'logged_in' in session:
         name = request.form.get('name')
         quantity = request.form.get('quantity')
+        # If an error to return to home page
+        tickets = bn.get_all_tickets()
+        email = session['logged_in']
+        user = bn.get_user(email)
+        #check ticket info
+        ticket_ret, ticket_error = bn.check_ticket(name,quantity,10,20202020)
+        # if ticket name not valid
+        if not ticket_ret:
+            return render_template('index.html', user=user,ticket=tickets, message=ticket_error)
         # templates are stored in the templates folder
         return render_template('buy.html', name=name, quantity=quantity)
     else:
@@ -181,6 +199,15 @@ def update_post():
         quantity = request.form.get('quantity')
         price = request.form.get('price')
         expiration_date = request.form.get('expiration_date')
+        # If an error to return to home page
+        tickets = bn.get_all_tickets()
+        email = session['logged_in']
+        user = bn.get_user(email)
+        #check ticket info
+        ticket_ret, ticket_error = bn.check_ticket(name,quantity,price,expiration_date)
+        # if ticket name not valid
+        if not ticket_ret:
+            return render_template('index.html', user=user,ticket=tickets, message=ticket_error)
         # templates are stored in the templates folder
         return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
