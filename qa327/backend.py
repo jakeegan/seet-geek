@@ -16,6 +16,15 @@ def get_user(email):
     """
     user = User.query.filter_by(email=email).first()
     return user
+    
+def get_ticket(name):
+    """
+    Get a ticket by a given name
+    :param name: the name of the ticket
+    :return: a ticket object
+    """
+    ticket = Ticket.query.filter_by(name=name).first()
+    return ticket
 
 
 def login_user(email, password):
@@ -163,3 +172,46 @@ def check_password(password):
     elif not any(c.islower() for c in password): 
         error = "Password must contain at least one lower case character"
     return not error, error    
+    
+def check_buy_ticket(name,quantity, user):
+    """
+    Check if the ticket can be bought
+    :param name: name of the ticket
+    :param quantity: quantity of tickets
+    :param user: the user buying the ticket
+    :return: true if the ticket is valid, false if the ticket is invalid
+    :return: error message if there is any
+    """
+    error = None
+
+    if set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
+        error = "Ticket name must be alphanumeric"
+    elif name.startswith(' ') or name.endswith(' '):
+        error = "space allowed only if it is not the first or the last character"
+    elif len(name) > 60:
+        error = "The name of the ticket must be no longer than 60 characters"
+    elif int(quantity) < 0 or int(quantity) > 100:
+        error = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
+    elif Ticket.query.filter_by(name=name).count() == 0 or int(quantity) > int(get_ticket(name).quantity):
+        error = "The ticket name must exist in the database and the quantity must be more than the quantity requested to buy"
+    elif user.balance < int(get_ticket(name).price)*int(quantity)*1.4:
+        error = "The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)"
+    return not error, error
+    
+def buy_ticket(name, quantity, user):
+    """
+    Perform the action of buying a ticket by updating ticket and user objects in database
+    :param name: name of the ticket
+    :param quantity: quantity of tickets
+    :param user: the user buying the ticket
+    """
+    update_ticket = get_ticket(name)
+    update_ticket.quantity = int(update_ticket.quantity) - int(quantity)
+    update_user = user
+    update_user.balance = int(update_user.balance) - int(update_ticket.price)*int(quantity)*1.4
+    
+    try:
+        db.session.commit()
+    except exc.SQLAlchemyError as e:
+        return(e._message)
+    
