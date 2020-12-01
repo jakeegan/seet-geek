@@ -142,7 +142,7 @@ def profile(user):
     # by using @authenticate, we don't need to re-write
     # the login checking code all the time for other
     # front-end portals
-    bn.add_new_ticket(name="test_ticket",quantity=10,price=20,expiration_date=20201231)
+    bn.add_new_ticket(name="test ticket",quantity=10,price=20,expiration_date=20201231)
     bn.add_new_ticket(name="test_ticket2",quantity=10,price=20,expiration_date=20201231)
     bn.add_new_ticket(name="test_ticket_old",quantity=10,price=20,expiration_date=20101101)
     tickets = bn.get_all_tickets()
@@ -156,14 +156,14 @@ def sell_post():
         price = request.form.get('price')
         expiration_date = request.form.get('expiration_date')
         # If an error to return to home page
-        tickets = bn.get_all_tickets()
         email = session['logged_in']
         user = bn.get_user(email)
         #check ticket info
-        ticket_ret, ticket_error = bn.check_ticket(name,quantity,price,expiration_date)
+        ret, error = bn.check_ticket(name,quantity,price,expiration_date)
         # if ticket name not valid
-        if not ticket_ret:
-            return render_template('index.html', user=user,ticket=tickets, message=ticket_error)
+        if not ret:
+            tickets = bn.get_all_tickets()
+            return render_template('index.html', user=user,ticket=tickets, message=error)
         # templates are stored in the templates folder
         return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
@@ -176,17 +176,18 @@ def buy_post():
     if 'logged_in' in session:
         name = request.form.get('name')
         quantity = request.form.get('quantity')
-        # If an error to return to home page
-        tickets = bn.get_all_tickets()
         email = session['logged_in']
         user = bn.get_user(email)
-        #check ticket info
-        ticket_ret, ticket_error = bn.check_ticket(name,quantity,10,20202020)
-        # if ticket name not valid
-        if not ticket_ret:
-            return render_template('index.html', user=user,ticket=tickets, message=ticket_error)
-        # templates are stored in the templates folder
-        return render_template('buy.html', name=name, quantity=quantity)
+        # Check if buying a ticket is valid
+        ret, error = bn.check_buy_ticket(name, quantity, user)
+        if not ret:
+            # If not valid, return error
+            tickets = bn.get_all_tickets()
+            return render_template('index.html', user=user,ticket=tickets, message=error)
+        else:
+            # If valid, call buy ticket and update GUI
+            bn.buy_ticket(name, quantity, user)
+            return render_template('buy.html', name=name, quantity=quantity)
     else:
         flash('You cannot access /buy while being logged out')
         return redirect('/login')
@@ -200,14 +201,14 @@ def update_post():
         price = request.form.get('price')
         expiration_date = request.form.get('expiration_date')
         # If an error to return to home page
-        tickets = bn.get_all_tickets()
         email = session['logged_in']
         user = bn.get_user(email)
         #check ticket info
-        ticket_ret, ticket_error = bn.check_ticket(name,quantity,price,expiration_date)
+        ret, error = bn.check_ticket(name,quantity,price,expiration_date)
         # if ticket name not valid
-        if not ticket_ret:
-            return render_template('index.html', user=user,ticket=tickets, message=ticket_error)
+        if not ret:
+            tickets = bn.get_all_tickets()
+            return render_template('index.html', user=user,ticket=tickets, message=error)
         # templates are stored in the templates folder
         return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
