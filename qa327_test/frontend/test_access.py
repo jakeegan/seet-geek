@@ -22,7 +22,7 @@ class TestCase7_1(BaseCase):
         self.type("#password", "Testing!")
         self.click('input[type="submit"]')
         self.open(base_url + '/logout')
-        self.assert_text("Please login","#message")
+        self.assert_text("please login","#message")
 
     @patch('qa327.backend.get_user', return_value=test_user)
     def testcase7_1_2(self, *_):
