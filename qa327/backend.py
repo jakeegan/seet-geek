@@ -191,6 +191,14 @@ def check_ticket(name,quantity,price,expiration_date):
         error = "Ticket Name must not include a space at the beginning"
     elif name.endswith(' '):
         error = "Ticket Name must not include a space at the end"
+    elif int(price) < 10:
+        error = "Ticket Price cannot be less than 10"
+    elif int(price) > 100:
+        error = "Ticket Price cannot be more than 100"
+    elif not expiration_date.isdecimal(): 
+        error = "Ticket Date must not include non-numeric characters"
+    elif len(expiration_date) != 8:
+        error = "Ticket Date must be 8 characters long"
     return not error, error
  
 # For buy
