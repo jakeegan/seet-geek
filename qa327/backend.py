@@ -172,7 +172,28 @@ def check_password(password):
     elif not any(c.islower() for c in password): 
         error = "Password must contain at least one lower case character"
     return not error, error    
-    
+
+# For sell and update
+def check_ticket(name,quantity,price,expiration_date):
+    """
+    Check if the ticket information is valid
+    :param name: name of the ticket
+    :param quantity: quantity of tickets
+    :param price: price of the ticket
+    :param expiration_date: the expiration date of the ticket
+    :return: true if the ticket is valid, false if the ticket is invalid
+    :return: error message if there is any
+    """
+    error = None
+    if set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
+        error = "Ticket Name must be alphanumeric"
+    elif name.startswith(' '):
+        error = "Ticket Name must not include a space at the beginning"
+    elif name.endswith(' '):
+        error = "Ticket Name must not include a space at the end"
+    return not error, error
+ 
+# For buy
 def check_buy_ticket(name,quantity, user):
     """
     Check if the ticket can be bought
@@ -215,3 +236,4 @@ def buy_ticket(name, quantity, user):
     except exc.SQLAlchemyError as e:
         return(e._message)
     
+

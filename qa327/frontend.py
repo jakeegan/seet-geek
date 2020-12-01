@@ -155,6 +155,15 @@ def sell_post():
         quantity = request.form.get('quantity')
         price = request.form.get('price')
         expiration_date = request.form.get('expiration_date')
+        # If an error to return to home page
+        email = session['logged_in']
+        user = bn.get_user(email)
+        #check ticket info
+        ret, error = bn.check_ticket(name,quantity,price,expiration_date)
+        # if ticket name not valid
+        if not ret:
+            tickets = bn.get_all_tickets()
+            return render_template('index.html', user=user,ticket=tickets, message=error)
         # templates are stored in the templates folder
         return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
@@ -191,6 +200,15 @@ def update_post():
         quantity = request.form.get('quantity')
         price = request.form.get('price')
         expiration_date = request.form.get('expiration_date')
+        # If an error to return to home page
+        email = session['logged_in']
+        user = bn.get_user(email)
+        #check ticket info
+        ret, error = bn.check_ticket(name,quantity,price,expiration_date)
+        # if ticket name not valid
+        if not ret:
+            tickets = bn.get_all_tickets()
+            return render_template('index.html', user=user,ticket=tickets, message=error)
         # templates are stored in the templates folder
         return render_template('update.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
