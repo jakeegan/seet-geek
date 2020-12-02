@@ -191,6 +191,10 @@ def check_ticket(name,quantity,price,expiration_date):
         error = "Ticket Name must not include a space at the beginning"
     elif name.endswith(' '):
         error = "Ticket Name must not include a space at the end"
+    elif len(name) > 60:
+        error = "The name of the ticket must be no longer than 60 characters"
+    elif int(quantity) <= 0 or int(quantity) > 100:
+        error = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
     return not error, error
  
 # For buy
@@ -211,7 +215,7 @@ def check_buy_ticket(name,quantity, user):
         error = "space allowed only if it is not the first or the last character"
     elif len(name) > 60:
         error = "The name of the ticket must be no longer than 60 characters"
-    elif int(quantity) < 0 or int(quantity) > 100:
+    elif int(quantity) <= 0 or int(quantity) > 100:
         error = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
     elif Ticket.query.filter_by(name=name).count() == 0 or int(quantity) > int(get_ticket(name).quantity):
         error = "The ticket name must exist in the database and the quantity must be more than the quantity requested to buy"
