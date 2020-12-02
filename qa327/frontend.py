@@ -154,7 +154,7 @@ def sell_post():
         name = request.form.get('name')
         quantity = request.form.get('quantity')
         price = request.form.get('price')
-        expiration_date = int(request.form.get('expiration_date'))
+        expiration_date = request.form.get('expiration_date')
         # If an error to return to home page
         email = session['logged_in']
         user = bn.get_user(email)
@@ -165,7 +165,7 @@ def sell_post():
             tickets = bn.get_all_tickets()
             return render_template('index.html', user=user,ticket=tickets, message=error)
         # templates are stored in the templates folder
-        bn.add_new_ticket(name=name,quantity=quantity,price=price,expiration_date=expiration_date)
+        bn.add_new_ticket(name=name,quantity=quantity,price=price,expiration_date=int(expiration_date))
         return render_template('sell.html', name=name, quantity=quantity, price=price, expiration_date=expiration_date)
     else:
         flash('You cannot access /sell while being logged out')
