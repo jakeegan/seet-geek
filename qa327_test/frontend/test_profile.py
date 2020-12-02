@@ -9,35 +9,38 @@ from werkzeug.security import generate_password_hash, check_password_hash
 test_user = User(
     email='testing@test.com',
     name='Test',
-    password=generate_password_hash('Testing!')
+    password=generate_password_hash('Testing!'),
+    balance=5000
 )
 test_ticket = Ticket(
-    name='test_ticket_yo',
+    name='test ticket yo',
     quantity='10',
     price='10',
     expiration_date=20201201
 )
 test_ticket_old = Ticket(
-    name='test_ticket_old',
+    name='test ticket old',
     quantity='10',
     price='10',
     expiration_date=20101101
 )
 test_update = Ticket(
-    name='update_ticket',
+    name='update ticket',
     quantity='10',
     price='10',
     expiration_date=20201201
 )
 test_sell = Ticket(
-    name='sell_ticket',
+    name='sell ticket',
     quantity='10',
     price='10',
     expiration_date=20201201
 )
 test_buy = Ticket(
-    name='sell_ticket',
-    quantity='10'
+    name='test ticket',
+    quantity='10',
+    price='10',
+    expiration_date=20201201
 )
 
 # Test case R3.1 - If the user is not logged in, redirect to login page
@@ -147,7 +150,7 @@ class TestCase3_5(BaseCase):
         self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.assert_element("#tickets")
-        self.assert_false(self.is_text_visible("Name: test_ticket_old"))
+        self.assert_false(self.is_text_visible("Name: test ticket old"))
 
 # Test case R3.6 - This page contains a form that a user can submit new tickets for sale.
 # Fields: name, quantity, price, expiration date
@@ -205,13 +208,13 @@ class TestCase3_9(BaseCase):
         self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#sell_form').click()
-        self.type("#name","sell_ticket")
+        self.type("#name","sell ticket")
         self.type("#quantity","10")
         self.type("#price","10")
         self.type("#expiration_date","20201201")
         self.click('input[type="submit"]')
         self.assert_title("Sell")
-        self.assert_text("Ticket Name: sell_ticket")
+        self.assert_text("Ticket Name: sell ticket")
         self.assert_text("Ticket Quantity: 10")
         self.assert_text("Ticket Price: 10")
         self.assert_text("Ticket Expiration Date: 20201201")
@@ -219,6 +222,7 @@ class TestCase3_9(BaseCase):
 # Test case R3.10 - The ticket-buying form can be posted to /buy
 class TestCase3_10(BaseCase):
     @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.get_ticket', return_value=test_buy)
     def testcase3_10(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -226,11 +230,11 @@ class TestCase3_10(BaseCase):
         self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#buy_form').click()
-        self.type("#bname","buy_ticket")
+        self.type("#bname","test ticket")
         self.type("#bquantity","10")
         self.get_element('#bsubmit').click()
         self.assert_title("Buy")
-        self.assert_text("Ticket Name: buy_ticket")
+        self.assert_text("Ticket Name: test ticket")
         self.assert_text("Ticket Quantity: 10")
 
 # Test case R3.11 - The ticket-update form can be posted to /update
@@ -243,13 +247,13 @@ class TestCase3_11(BaseCase):
         self.type("#password","Testing!")
         self.click('input[type="submit"]')
         self.get_element('#update_form').click()
-        self.type("#uname","update_ticket")
+        self.type("#uname","update ticket")
         self.type("#uquantity","10")
         self.type("#uprice","10")
         self.type("#uexpiration_date","20201201")
         self.get_element('#usubmit').click()
         self.assert_title("Update")
-        self.assert_text("Ticket Name: update_ticket")
+        self.assert_text("Ticket Name: update ticket")
         self.assert_text("Ticket Quantity: 10")
         self.assert_text("Ticket Price: 10")
         self.assert_text("Ticket Expiration Date: 20201201")
