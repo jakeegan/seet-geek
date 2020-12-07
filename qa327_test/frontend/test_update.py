@@ -109,7 +109,7 @@ class TestCase6_1(BaseCase):
 # Test case R6.2 - The name of the ticket is no longer than 60 characters
 class TestCase6_2(BaseCase):
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase4_3(self, *_):
+    def testcase6_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
