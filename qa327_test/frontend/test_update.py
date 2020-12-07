@@ -12,10 +12,52 @@ test_user = User(
     password=generate_password_hash('Testing!'),
     balance=5000
 )
+test_ticket = Ticket(
+    name='test ticket yo',
+    quantity='10',
+    price='10',
+    expiration_date=20201201
+)
+invalid_ticket_name1 = Ticket(
+    name='@testTicket',
+    quantity='10',
+    price='10',
+    expiration_date=20201201
+)
+invalid_ticket_name2 = Ticket(
+    name=' testTicket',
+    quantity='10',
+    price='10',
+    expiration_date=20201201
+)
+invalid_ticket_name3 = Ticket(
+    name='testTicket ',
+    quantity='10',
+    price='10',
+    expiration_date=20201201
+)
+invalid_ticket_name4 = Ticket(
+    name='testTicketxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    quantity='10',
+    price='10',
+    expiration_date=20201101
+)
+invalid_ticket_quantity1 = Ticket(
+    name='testTicket',
+    quantity='0',
+    price='10',
+    expiration_date=20201101
+)
+invalid_ticket_quantity2 = Ticket(
+    name='testTicket',
+    quantity='101',
+    price='10',
+    expiration_date=20201101
+)
 
 # Test case R6.1 - The name of the ticket has to be alphanumeric-only, and space 
 # allowed only if it is not the first or last character
-class TestCase4_1(BaseCase):
+class TestCase6_1(BaseCase):
     # Test Case R6.1.1 - Non-alphanumeric
     @patch('qa327.backend.get_user', return_value=test_user)
     def testcase6_1_1(self, *_):
