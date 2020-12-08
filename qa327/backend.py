@@ -203,6 +203,8 @@ def check_ticket(name,quantity,price,expiration_date):
         error = "The name of the ticket must be no longer than 60 characters"
     elif int(quantity) <= 0 or int(quantity) > 100:
         error = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
+    elif Ticket.query.filter_by(name=name).count() == 0:
+        error = "Ticket name not found"
     return not error, error
  
 # For buy
