@@ -46,7 +46,6 @@ class TestCase9_1(BaseCase):
         self.assert_text("please login", "#message")
     
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.get_ticket', return_value=test_ticket)
     # Test Case R9.1.2 - User purchases a ticket
     def testcase9_1_2(self, *_):
         self.open(base_url + '/logout')
@@ -63,7 +62,7 @@ class TestCase9_1(BaseCase):
         self.open(base_url)
         self.assert_element("#tickets")
         self.assert_text("Quantity: 9","#tickets")
-        self.assert_text("Available balance: $4986.0", "#balance")
+        self.assert_text("Available balance: $4972.0", "#balance")
         self.open(base_url + '/logout')
         self.assert_element("#message")
         self.assert_text("please login", "#message")
