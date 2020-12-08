@@ -257,4 +257,3 @@ class TestCase3_11(BaseCase):
         self.assert_text("Ticket Quantity: 10")
         self.assert_text("Ticket Price: 20")
         self.assert_text("Ticket Expiration Date: 20201231")
-'''
