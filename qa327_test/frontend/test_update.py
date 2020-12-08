@@ -186,7 +186,7 @@ class TestCase5_4(BaseCase):
         self.get_element('#update_form').click()
         self.type("#uname","testTicket")
         self.type("#uquantity","10")
-        self.type("#uprice","10")
+        self.type("#uprice","101")
         self.type("#uexpiration_date","20201201")
         self.get_element('#usubmit').click()
         self.assert_text("Ticket Price cannot be more than 100")
@@ -208,7 +208,8 @@ class TestCase5_5(BaseCase):
         self.type("#uexpiration_date","20/11/01")
         self.get_element('#usubmit').click()
         self.assert_text("Ticket Date must not include non-numeric characters")
-
+    
+    @patch('qa327.backend.get_user', return_value=test_user)
     def testcase5_5_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
@@ -232,12 +233,15 @@ class TestCase5_6(BaseCase):
         self.type("#password", "Testing!")
         self.click('input[type="submit"]')
         self.get_element('#update_form').click()
-        self.type("#uname","testTicket")
+        self.type("#uname","test ticket")
         self.type("#uquantity","10")
-        self.type("#uprice","10")
-        self.type("#uexpiration_date","20201201")
+        self.type("#uprice","20")
+        self.type("#uexpiration_date","20201231")
         self.get_element('#usubmit').click()
-        self.assert_text("Update")
+        self.assert_text("Ticket Name: test ticket")
+        self.assert_text("Ticket Quantity: 10")
+        self.assert_text("Ticket Price: 20")
+        self.assert_text("Ticket Expiration Date: 20201231")
 
     @patch('qa327.backend.get_user', return_value=test_user)
     def testcase5_6_2(self, *_):
