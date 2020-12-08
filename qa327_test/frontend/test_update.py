@@ -55,12 +55,12 @@ invalid_ticket_quantity2 = Ticket(
     expiration_date=20201101
 )
 
-# Test case R6.1 - The name of the ticket has to be alphanumeric-only, and space 
+# Test case R5.1 - The name of the ticket has to be alphanumeric-only, and space 
 # allowed only if it is not the first or last character
-class TestCase6_1(BaseCase):
-    # Test Case R6.1.1 - Non-alphanumeric
+class TestCase5_1(BaseCase):
+    # Test Case R5.1.1 - Non-alphanumeric
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase6_1_1(self, *_):
+    def testcase5_1_1(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
@@ -74,9 +74,9 @@ class TestCase6_1(BaseCase):
         self.click('input[type="submit"]')
         self.assert_text("Ticket Name must be alphanumeric")
 
-    # Test Case R6.1.2 - First character is a space
+    # Test Case R5.1.2 - First character is a space
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase6_1_2(self, *_):
+    def testcase5_1_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
@@ -90,9 +90,9 @@ class TestCase6_1(BaseCase):
         self.click('input[type="submit"]')
         self.assert_text("Ticket Name must not include a space at the beginning")
 
-    # Test Case R6.1.3 - Last character is a space
+    # Test Case R5.1.3 - Last character is a space
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase6_1_3(self, *_):
+    def testcase5_1_3(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
@@ -106,10 +106,10 @@ class TestCase6_1(BaseCase):
         self.click('input[type="submit"]')
         self.assert_text("Ticket Name must not include a space at the end")
 
-# Test case R6.2 - The name of the ticket is no longer than 60 characters
-class TestCase6_2(BaseCase):
+# Test case R5.2 - The name of the ticket is no longer than 60 characters
+class TestCase5_2(BaseCase):
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase6_2(self, *_):
+    def testcase5_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
@@ -123,11 +123,11 @@ class TestCase6_2(BaseCase):
         self.click('input[type="submit"]')
         self.assert_text("The name of the ticket must be no longer than 60 characters")
 
-# Test case R6.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100
-class TestCase6_3(BaseCase):
-    # Test Case R6.3.1 - 0 quantity
+# Test case R5.3 - The quantity of the tickets has to be more than 0, and less than or equal to 100
+class TestCase5_3(BaseCase):
+    # Test Case R5.3.1 - 0 quantity
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase6_3_1(self, *_):
+    def testcase5_3_1(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
@@ -141,9 +141,9 @@ class TestCase6_3(BaseCase):
         self.click('input[type="submit"]')
         self.assert_text("The quantity of the tickets has to be more than 0, and less than or equal to 100.")
 
-    # Test Case R6.3.2  - 101 quantity
+    # Test Case R5.3.2  - 101 quantity
     @patch('qa327.backend.get_user', return_value=test_user)
-    def testcase6_3_2(self, *_):
+    def testcase5_3_2(self, *_):
         self.open(base_url + '/logout')
         self.open(base_url + '/login')
         self.type("#email","testing@test.com")
