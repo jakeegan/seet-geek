@@ -204,3 +204,77 @@ class TestCase4_4(BaseCase):
         self.type("#expiration_date","20201201")
         self.click('input[type="submit"]')
         self.assert_text("Ticket Price cannot be more than 100")
+
+# Test case R4.5 - Date must be given in the format YYYYMMDD
+class TestCase4_5(BaseCase):
+    # Test Case R4.5.1 - Includes non-numeric characters
+    @patch('qa327.backend.get_user', return_value=test_user)
+    def testcase4_5_1(self, *_):
+        self.open(base_url + '/logout')
+        self.open(base_url + '/login')
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
+        self.click('input[type="submit"]')
+        self.get_element('#sell_form').click()
+        self.type("#name", "testTicket")
+        self.type("#quantity", "50")
+        self.type("#price", "15")
+        self.type("#expiration_date", "20/11/01")
+        self.click('input[type="submit"]')
+        self.assert_text("Ticket Date must not include non-numeric characters")
+
+    # Test Case R4.5.2 - Does not include 8 characters
+    @patch('qa327.backend.get_user', return_value=test_user)
+    def testcase4_5_2(self, *_):
+        self.open(base_url + '/logout')
+        self.open(base_url + '/login')
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
+        self.click('input[type="submit"]')
+        self.get_element('#sell_form').click()
+        self.type("#name", "testTicket")
+        self.type("#quantity", "50")
+        self.type("#price", "15")
+        self.type("#expiration_date", "2020111")
+        self.click('input[type="submit"]')
+        self.assert_text("Ticket Date must be 8 characters long")
+
+
+# Test case R4.6 - For any errors, redirect back to / and show an error message
+class TestCase4_6(BaseCase):
+    # Test Case R4.6 - Redirects back to /
+    @patch('qa327.backend.get_user', return_value=test_user)
+    def testcase4_6(self, *_):
+        self.open(base_url + '/logout')
+        self.open(base_url + '/login')
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
+        self.click('input[type="submit"]')
+        self.get_element('#sell_form').click()
+        self.type("#name", "@testTicket")
+        self.type("#quantity", "10")
+        self.type("#price", "10")
+        self.type("#expiration_date", "20201101")
+        self.click('input[type="submit"]')
+        self.assert_element("#welcome-header")
+        self.assert_text("Ticket Name must be alphanumeric")        
+
+# Test case R4.7 - Add new ticket to user profile page
+class TestCase4_7(BaseCase):
+    # Test Case R4.7 - Does not include 8 characters
+    @patch('qa327.backend.get_user', return_value=test_user)
+    def testcase4_6(self, *_):
+        self.open(base_url + '/logout')
+        self.open(base_url + '/login')
+        self.type("#email","testing@test.com")
+        self.type("#password","Testing!")
+        self.click('input[type="submit"]')
+        self.get_element('#sell_form').click()
+        self.type("#name", "testTicket123")
+        self.type("#quantity", "10")
+        self.type("#price", "10")
+        self.type("#expiration_date", "20221201")
+        self.click('input[type="submit"]')
+        self.open(base_url + '/')
+        self.assert_element("#tickets")
+        self.assert_text("Name: testTicket123","#tickets")
