@@ -204,6 +204,40 @@ def check_ticket(name,quantity,price,expiration_date):
     elif int(quantity) <= 0 or int(quantity) > 100:
         error = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
     return not error, error
+
+
+def check_update_ticket(name,quantity,price,expiration_date):
+    """
+    Check if the ticket information is valid
+    :param name: name of the ticket
+    :param quantity: quantity of tickets
+    :param price: price of the ticket
+    :param expiration_date: the expiration date of the ticket
+    :return: true if the ticket is valid, false if the ticket is invalid
+    :return: error message if there is any
+    """
+    error = None
+    if set('[~!@#$%^&*()_+{}":;\']+$').intersection(name):
+        error = "Ticket Name must be alphanumeric"
+    elif name.startswith(' '):
+        error = "Ticket Name must not include a space at the beginning"
+    elif name.endswith(' '):
+        error = "Ticket Name must not include a space at the end"
+    elif int(price) < 10:
+        error = "Ticket Price cannot be less than 10"
+    elif int(price) > 100:
+        error = "Ticket Price cannot be more than 100"
+    elif not expiration_date.isdecimal(): 
+        error = "Ticket Date must not include non-numeric characters"
+    elif len(expiration_date) != 8:
+        error = "Ticket Date must be 8 characters long"
+    elif len(name) > 60:
+        error = "The name of the ticket must be no longer than 60 characters"
+    elif int(quantity) <= 0 or int(quantity) > 100:
+        error = "The quantity of the tickets has to be more than 0, and less than or equal to 100."
+    elif Ticket.query.filter_by(name=name).count() == 0:
+        error = "Ticket name not found"
+    return not error, error
  
 # For buy
 def check_buy_ticket(name,quantity, user):
