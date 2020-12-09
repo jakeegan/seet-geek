@@ -205,7 +205,7 @@ def update_post():
         email = session['logged_in']
         user = bn.get_user(email)
         #check ticket info
-        ret, error = bn.check_ticket(name,quantity,price,expiration_date)
+        ret, error = bn.check_update_ticket(name,quantity,price,expiration_date)
         # if ticket name not valid
         if not ret:
             tickets = bn.get_all_tickets()
