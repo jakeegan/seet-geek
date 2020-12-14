@@ -1,9 +1,9 @@
 FROM python:3.8-slim
-RUN mkdir /seet-geek
-WORKDIR /seet-geek
-ADD requirements.txt /seet-geek
+RUN mkdir /app
+WORKDIR /app
+ADD requirements.txt /app
 RUN pip3 install -r requirements.txt
-ADD . /seet-geek
-ADD wait-for-it.sh /seet-geek
-RUN chmod +x /seet-geek/wait-for-it.sh
+ADD . /app
+ADD wait-for-it.sh /app
+RUN chmod +x /app/wait-for-it.sh
 EXPOSE 8081
